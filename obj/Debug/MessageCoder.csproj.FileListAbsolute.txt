@@ -1,0 +1,15 @@
+C:\Users\Owner\source\repos\MessageCoderOG\bin\Debug\MessageCoder.exe.config
+C:\Users\Owner\source\repos\MessageCoderOG\bin\Debug\MessageCoder.exe
+C:\Users\Owner\source\repos\MessageCoderOG\bin\Debug\MessageCoder.pdb
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.csprojAssemblyReference.cache
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MainWindow.g.cs
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\App.g.cs
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder_MarkupCompile.cache
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder_MarkupCompile.lref
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MainWindow.baml
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.g.resources
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.Properties.Resources.resources
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.csproj.GenerateResource.cache
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.csproj.CoreCompileInputs.cache
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.exe
+C:\Users\Owner\source\repos\MessageCoderOG\obj\Debug\MessageCoder.pdb
