@@ -17,7 +17,8 @@ namespace MessageCoder
 {
     public partial class MainWindow : Window
     {
-        private char[] alpha = new char[26];
+        public const int alphaMax = 40;
+        private char[] alpha = new char[alphaMax];
 
         public MainWindow()
         {
@@ -26,10 +27,29 @@ namespace MessageCoder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            fillAlpha(alpha);
             string message = MessageBox.Text.Trim();
             int scrambleNum = int.Parse(ScrambleNumBox.Text.Trim());
             Rearrange(scrambleNum, alpha);
             string newMessage = Scramble(message, alpha);
+            ResultBox.Text = newMessage;
+        }
+        public void fillAlpha(char[] alpha)
+        {
+            alpha[26] = ' ';
+            alpha[27] = '.';
+            alpha[28] = ',';
+            alpha[29] = '?';
+            for(int i = 30; i < 40; i++)
+            {
+                alpha[i] = (char)(i % 10);
+            }
+            int index = 0;
+            for(int i = 0; i < 26; i++)
+            {
+                int letNum = i + 65;
+                alpha[index] = (char)letNum;
+            }
         }
         public void Rearrange(int n, char[] alpha)  //This function rearranges the alphabet based on the number entered.
         {
@@ -48,10 +68,32 @@ namespace MessageCoder
 
         string Scramble(string message, char[] alpha)
         {
-            //find letter in new alphabet
-            //perform ceasar sypher
-            //replace letter
-            return "temp return";
+            StringBuilder scramMessage = new StringBuilder(message);
+            int length = message.Length;
+            for(int i = 0; i < length; i++)
+            {
+                char original = message[i];
+                char newCh = flip(original, alpha);
+                scramMessage[i] = newCh;                //replace letter
+                       
+            }
+            
+            return scramMessage.ToString();
+        }
+
+        public char flip(char ch, char[] alpha)
+        {
+            int index = 0;
+            char newCh = alpha[index];
+            while (ch != newCh && index < alphaMax-1)                 //find letter in new alphabet
+            {
+                index++;
+                newCh = alpha[index];
+            }
+            index = index + (alphaMax / 2);     //perform ceasar sypher
+            index %= alphaMax;
+            newCh = alpha[index];
+            return newCh;
         }
     }
 }
