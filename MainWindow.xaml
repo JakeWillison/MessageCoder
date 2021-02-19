@@ -16,5 +16,6 @@
         <TextBox x:Name= "ResultBox" HorizontalAlignment="Left" Height="98" TextWrapping="Wrap" Text="Result" VerticalAlignment="Top" Width="289" Margin="432,77,0,0"/>
         <Label Content="Scrambled Message:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,28,0,0" Width="124"/>
         <Label Content="Initial Message:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,28,0,0" Width="98"/>
+        <Button x:Name="ResetButton" Content="Reset" Click="Button_Click2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="151,289,0,0"/>
     </Grid>
 </Window>

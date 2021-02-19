@@ -17,8 +17,9 @@ namespace MessageCoder
 {
     public partial class MainWindow : Window
     {
-        public char[] alpha = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '?', ',', '1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-
+        public char[] alpha = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '?', ',', ' ', '?', '1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+        public bool hasRearranged = false;
+        public int scramNum = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,34 +29,46 @@ namespace MessageCoder
         {
             string message = MessageBox.Text.Trim();
             int scrambleNum = int.Parse(ScrambleNumBox.Text.Trim());
-            Rearrange(scrambleNum, alpha);
-            string newMessage = Scramble(message, alpha);
+            char[] newAlpha = alpha;
+            Rearrange(scrambleNum, newAlpha);
+            string newMessage = Scramble(message, newAlpha);
             ResultBox.Text = newMessage;
         }
 
-        public void Rearrange(int n, char[] alpha)  //This function rearranges the alphabet based on the number entered.
+        private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            int timesRun = 0;
-            do
+            hasRearranged = false;
+            ResultBox.Text = "Waiting new message";
+            MessageBox.Text = "Enter new message";
+            ScrambleNumBox.Text = "##";
+        }
+        public void Rearrange(int n, char[] newAlpha)  //This function rearranges the alphabet based on the number entered.
+        {
+            if (!hasRearranged)
             {
-                for (int i = 0; i < 13; i++)
+                int timesRun = 0;
+                do
                 {
-                    char temp = alpha[i];
-                    alpha[i] = alpha[i + i];
-                    alpha[i + i] = temp;
-                }
-                timesRun++;
-            } while (timesRun < n);
+                    for (int i = 0; i < 13; i++)
+                    {
+                        char temp = newAlpha[i];
+                        newAlpha[i] = newAlpha[i + i];
+                        newAlpha[i + i] = temp;
+                    }
+                    timesRun++;
+                } while (timesRun < n);
+            }
+            hasRearranged = true;
         }
 
-        string Scramble(string message, char[] alpha)
+        string Scramble(string message, char[] newAlpha)
         {
             StringBuilder scramMessage = new StringBuilder(message);
             int length = message.Length;
             for(int i = 0; i < length; i++)
             {
                 char original = message[i];
-                char newCh = flip(original, alpha);
+                char newCh = flip(original, newAlpha);
                 scramMessage[i] = newCh;                //replace letter
                        
             }
@@ -63,18 +76,22 @@ namespace MessageCoder
             return scramMessage.ToString();
         }
 
-        public char flip(char ch, char[] alpha)
+        public char flip(char ch, char[] newAlpha)
         {
             int index = 0;
-            char newCh = alpha[index];
-            while (ch != newCh && index < alpha.Length-1)                 //find letter in new alphabet
+            char newCh = newAlpha[index];
+            while (ch != newCh && index < newAlpha.Length-1)                 //find letter in new alphabet
             {
                 index++;
-                newCh = alpha[index];
+                newCh = newAlpha[index];
             }
-            index = index + (alpha.Length / 2);     //perform ceasar sypher
-            index %= alpha.Length;
-            newCh = alpha[index];
+            index = index + (newAlpha.Length / 2);     //perform ceasar sypher
+            if(index % newAlpha.Length > 0)
+            {
+                index %= newAlpha.Length;
+            }
+            
+            newCh = newAlpha[index];
             return newCh;
         }
     }
