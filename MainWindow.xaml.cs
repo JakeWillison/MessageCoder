@@ -17,8 +17,7 @@ namespace MessageCoder
 {
     public partial class MainWindow : Window
     {
-        public const int alphaMax = 40;
-        private char[] alpha = new char[alphaMax];
+        public char[] alpha = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '?', ',', '1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
         public MainWindow()
         {
@@ -27,30 +26,13 @@ namespace MessageCoder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            fillAlpha(alpha);
             string message = MessageBox.Text.Trim();
             int scrambleNum = int.Parse(ScrambleNumBox.Text.Trim());
             Rearrange(scrambleNum, alpha);
             string newMessage = Scramble(message, alpha);
             ResultBox.Text = newMessage;
         }
-        public void fillAlpha(char[] alpha)
-        {
-            alpha[26] = ' ';
-            alpha[27] = '.';
-            alpha[28] = ',';
-            alpha[29] = '?';
-            for(int i = 30; i < 40; i++)
-            {
-                alpha[i] = (char)(i % 10);
-            }
-            int index = 0;
-            for(int i = 0; i < 26; i++)
-            {
-                int letNum = i + 65;
-                alpha[index] = (char)letNum;
-            }
-        }
+
         public void Rearrange(int n, char[] alpha)  //This function rearranges the alphabet based on the number entered.
         {
             int timesRun = 0;
@@ -85,13 +67,13 @@ namespace MessageCoder
         {
             int index = 0;
             char newCh = alpha[index];
-            while (ch != newCh && index < alphaMax-1)                 //find letter in new alphabet
+            while (ch != newCh && index < alpha.Length-1)                 //find letter in new alphabet
             {
                 index++;
                 newCh = alpha[index];
             }
-            index = index + (alphaMax / 2);     //perform ceasar sypher
-            index %= alphaMax;
+            index = index + (alpha.Length / 2);     //perform ceasar sypher
+            index %= alpha.Length;
             newCh = alpha[index];
             return newCh;
         }
